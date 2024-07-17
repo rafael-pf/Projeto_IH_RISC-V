@@ -33,8 +33,6 @@ module alu#(
                     ALUResult = SrcA >> SrcB;
             4'b0111 :       // SRAI
                     ALUResult = $signed(SrcA) >>> $signed(SrcB);
-            4'b1001 :       // ADDI
-                    ALUResult = $signed(SrcA) + $signed(SrcB);
             default:
                     ALUResult = 0;
             endcase
