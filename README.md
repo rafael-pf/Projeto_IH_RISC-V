@@ -31,15 +31,15 @@ Seu objetivo é implementar as instruções restantes listadas abaixo:
 | 9  | `SB`      |      ❌     |    ❌    |      ❌      |
 | 10 | `SH`      |      ❌     |    ❌    |      ❌      |
 | 11 | `SLTI`    |      ❌     |    ❌    |      ❌      |
-| 12 | `ADDI`    |      ✅     |    ✅    |      ❌      |
+| 12 | `ADDI`    |      ✅     |    ✅    |      ✅      |
 | 13 | `SLLI`    |      ❌     |    ❌    |      ❌      |
 | 14 | `SRLI`    |      ❌     |    ❌    |      ❌      |
 | 15 | `SRAI`    |      ❌     |    ❌    |      ❌      |
-| 16 | `SUB`     |      ✅     |    ✅    |      ❌      |
+| 16 | `SUB`     |      ✅     |    ✅    |      ✅      |
 | 17 | `SLT`     |      ❌     |    ❌    |      ❌      |
 | 18 | `XOR`     |      ❌     |    ❌    |      ❌      |
 | 19 | `OR`      |      ❌     |    ❌    |      ❌      |
-| 20 | `LUI`     |      ❌     |    ❌    |      ❌      |
+| 20 | `LUI`     |      ✅     |    ✅    |      ✅      |
 | 21 | `HALT`    |      ❌     |    ❌    |      ❌      |
 
 Você tem permissão para modificar a implementação do processador como desejar (por exemplo, incluir fios, alterar tamanhos, modificar sinais, remover ou adicionar módulos, etc.), desde que o resultado final continue funcionando como um pipeline e produza os resultados corretos.
