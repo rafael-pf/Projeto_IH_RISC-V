@@ -38,6 +38,12 @@ module datamemory #(
       case (Funct3)
         3'b010:  //LW
         rd <= Dataout;
+        3'b000: //LB
+        rd <= $signed(Dataout[7:0]);
+        3'b001: //LH
+        rd <= $signed(Dataout[15:0]);
+        3'b100: //LBU
+        rd <= $unsigned(Dataout[7:0]);
         default: rd <= Dataout;
       endcase
     end else if (MemWrite) begin
@@ -45,6 +51,14 @@ module datamemory #(
         3'b010: begin  //SW
           Wr <= 4'b1111;
           Datain <= wd;
+        end
+        3'b000: begin  //SB
+          Wr <= 4'b0001; // primeiro bloco de memória: datain[7:0]
+          Datain[7:0] <= wd[7:0];
+        end
+        3'b001: begin  //SH
+          Wr <= 4'b0011; // dois primeiros blocos de memória: datain[15:0]
+          Datain[15:0] <= wd[15:0];
         end
         default: begin
           Wr <= 4'b1111;
