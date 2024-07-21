@@ -53,11 +53,11 @@ module datamemory #(
           Datain <= wd;
         end
         3'b000: begin  //SB
-          Wr <= 4'b0001; // primeiro bloco de memória: datain[7:0]
+          Wr <= 4'b0100; // primeiro bloco de memória: datain[7:0]
           Datain[7:0] <= wd[7:0];
         end
         3'b001: begin  //SH
-          Wr <= 4'b0011; // dois primeiros blocos de memória: datain[15:0]
+          Wr <= 4'b1100; // dois primeiros blocos de memória: datain[15:0]
           Datain[15:0] <= wd[15:0];
         end
         default: begin
