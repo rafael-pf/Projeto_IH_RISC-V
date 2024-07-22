@@ -21,20 +21,26 @@ module alu#(
                     ALUResult = $signed(SrcA) + $signed(SrcB);
             4'b1000:        // Equal
                     ALUResult = (SrcA == SrcB) ? 1 : 0;
-            4'b0001 :       // OR
+            4'b0001:       // OR
                     ALUResult = SrcA | SrcB;
-            4'b0011 :       // SUB
+            4'b0011:       // SUB
                     ALUResult = $signed(SrcA) - $signed(SrcB);
-            4'b0100 :       // XOR
+            4'b0100:       // XOR
                     ALUResult = SrcA ^ SrcB;
-            4'b0101 :       // SLL/SLLI
+            4'b0101:       // SLL/SLLI
                     ALUResult = SrcA << SrcB;
-            4'b0110 :       // SRL/SRLI
+            4'b0110:       // SRL/SRLI
                     ALUResult = SrcA >> SrcB;
-            4'b0111 :       // SRA/SRAI
+            4'b0111:       // SRA/SRAI
                     ALUResult = $signed(SrcA) >>> SrcB[4:0];
-            4'b1001 :       // SLT/SLTI
+            4'b1001:       // SLT/SLTI
                     ALUResult = ($signed(SrcA) < $signed(SrcB)) ? 1 : 0;
+            4'b1010:       // BGE
+                    ALUResult = ($signed(SrcA) >= $signed(SrcB)) ? 1 : 0;
+            4'b1011:       // BLT
+                    ALUResult = ($signed(SrcA) < $signed(SrcB)) ? 1 : 0;
+            4'b1100:       // BNE
+                    ALUResult = (SrcA != SrcB) ? 1 : 0;
             default:
                     ALUResult = 0;
             endcase
