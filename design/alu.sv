@@ -32,7 +32,7 @@ module alu#(
             4'b0110 :       // SRL/SRLI
                     ALUResult = SrcA >> SrcB;
             4'b0111 :       // SRA/SRAI
-                    ALUResult = $signed(SrcA) >>> $signed(SrcB);
+                    ALUResult = $signed(SrcA) >>> SrcB[4:0];
             4'b1001 :       // SLT/SLTI
                     ALUResult = ($signed(SrcA) < $signed(SrcB)) ? 1 : 0;
             default:
