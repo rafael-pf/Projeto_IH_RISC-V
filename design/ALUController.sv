@@ -13,7 +13,8 @@ module ALUController (
   assign Operation[0] = ((ALUOp == 2'b10) && (Funct3 == 3'b110) && (Funct7 == 7'b0000000)) ||  // Or
       ((ALUOp == 2'b10) && (Funct3 == 3'b000) && (Funct7 == 7'b0100000)) ||  // Sub
       ((ALUOp == 2'b10) && (Funct3 == 3'b001) && (Funct7 == 7'b0000000)) || // SLL/SLLI
-      ((ALUOp == 2'b10) && (Funct3 == 3'b101) && (Funct7 == 7'b0100000)); // SRAI
+      ((ALUOp == 2'b10) && (Funct3 == 3'b101) && (Funct7 == 7'b0100000)) || // SRAI
+      ((ALUOp == 2'b10) && (Funct3 == 3'b010) && (Funct7 == 7'b0000000)); // SLT/SLTI
 
 
   assign Operation[1] = (ALUOp == 2'b00) ||  // LW\SW
@@ -24,12 +25,12 @@ module ALUController (
       
 
   assign Operation[2] =  ((ALUOp==2'b10) && (Funct3==3'b101) && (Funct7==7'b0000000)) || // R\I->>
-      ((ALUOp == 2'b10) && (Funct3 == 3'b010)) ||  // R\I-<
       ((ALUOp == 2'b10) && (Funct3 == 3'b100) && (Funct7 == 7'b0000000)) ||  // Xor
       ((ALUOp == 2'b10) && (Funct3 == 3'b001) && (Funct7 == 7'b0000000)) || // SLL/SLLI
       ((ALUOp == 2'b10) && (Funct3 == 3'b101) && (Funct7 == 7'b0000000)) || // SRLI
       ((ALUOp == 2'b10) && (Funct3 == 3'b101) && (Funct7 == 7'b0100000)); // SRAI
 
   assign Operation[3] = (ALUOp == 2'b01) ||  // BEQ
-      ((ALUOp == 2'b10) && (Funct3 == 3'b010));  // R\I-<
+      ((ALUOp == 2'b10) && (Funct3 == 3'b010)) ||  // R\I-<
+      ((ALUOp == 2'b10) && (Funct3 == 3'b010) && (Funct7 == 7'b0000000)); // SLT/SLTI
 endmodule
