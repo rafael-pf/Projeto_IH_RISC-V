@@ -38,6 +38,27 @@ module datamemory #(
       case (Funct3)
         3'b010:  //LW
         rd <= Dataout;
+        3'b000: //LB
+        case (a[1:0])
+          2'b00: rd <= $signed(Dataout[7:0]);
+          2'b01: rd <= $signed(Dataout[15:8]);
+          2'b10: rd <= $signed(Dataout[23:16]);
+          2'b11: rd <= $signed(Dataout[31:24]);
+        endcase 
+        3'b001: //LH
+        case (a[1:0])
+          2'b00: rd <= $signed(Dataout[15:0]);
+          2'b01: rd <= $signed(Dataout[15:0]);
+          2'b10: rd <= $signed(Dataout[31:16]);
+          2'b11: rd <= $signed(Dataout[31:16]);
+        endcase
+        3'b100: //LBU
+        case (a[1:0])
+          2'b00: rd <= $unsigned(Dataout[7:0]);
+          2'b01: rd <= $unsigned(Dataout[15:8]);
+          2'b10: rd <= $unsigned(Dataout[23:16]);
+          2'b11: rd <= $unsigned(Dataout[31:24]);
+        endcase
         default: rd <= Dataout;
       endcase
     end else if (MemWrite) begin
@@ -45,6 +66,24 @@ module datamemory #(
         3'b010: begin  //SW
           Wr <= 4'b1111;
           Datain <= wd;
+        end
+        3'b000: begin  //SB
+          Datain <= wd;
+          case (a[1:0])
+            2'b00: Wr <= 4'b0001;
+            2'b01: Wr <= 4'b0010;
+            2'b10: Wr <= 4'b0100;
+            2'b11: Wr <= 4'b1000;
+          endcase
+        end
+        3'b001: begin  //SH
+          Datain <= wd;
+          case (a[1:0])
+            2'b00: Wr <= 4'b0011;
+            2'b01: Wr <= 4'b0011;
+            2'b10: Wr <= 4'b1100;
+            2'b11: Wr <= 4'b1100;
+          endcase
         end
         default: begin
           Wr <= 4'b1111;
