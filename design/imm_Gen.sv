@@ -24,6 +24,12 @@ module imm_Gen (
         1'b0
       };
 
+      7'b0010011: /*I-type ALU */
+      Imm_out = {inst_code[31] ? 20'hFFFFF : 20'b0, inst_code[31:20]};
+      
+      7'b0110111: /*U-type*/
+      Imm_out = {inst_code[31:12], 12'b0};
+
       default: Imm_out = {32'b0};
 
     endcase
