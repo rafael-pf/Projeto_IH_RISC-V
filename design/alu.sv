@@ -7,6 +7,7 @@ module alu#(
         (
         input logic [DATA_WIDTH-1:0]    SrcA,
         input logic [DATA_WIDTH-1:0]    SrcB,
+        input logic [8:0]    PC,
 
         input logic [OPCODE_LENGTH-1:0]    Operation,
         output logic[DATA_WIDTH-1:0] ALUResult
@@ -41,6 +42,8 @@ module alu#(
                     ALUResult = ($signed(SrcA) < $signed(SrcB)) ? 1 : 0;
             4'b1100:       // BNE
                     ALUResult = (SrcA != SrcB) ? 1 : 0;
+            4'b1101:       // JAL
+                    ALUResult = PC + 3'b100;
             default:
                     ALUResult = 0;
             endcase

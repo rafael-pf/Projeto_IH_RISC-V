@@ -220,6 +220,7 @@ module Datapath #(
   alu alu_module (
       FAmux_Result,
       SrcB,
+      B.Curr_Pc,
       ALU_CC,
       ALUResult
   );
