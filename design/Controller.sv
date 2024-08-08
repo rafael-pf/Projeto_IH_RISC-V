@@ -18,10 +18,11 @@ module Controller (
     output logic [1:0] ALUOp,  //00: LW/SW; 01:Branch; 10: Rtype
     output logic Branch,  //0: branch is not taken; 1: branch is taken
     output logic Jal,  //0: JAL is not taken; 1: JAL is taken
-    output logic Jalr  //0: JALR is not taken; 1: JALR is taken
+    output logic Jalr,  //0: JALR is not taken; 1: JALR is taken
+    output logic Halt  //0: Halt is not taken; 1: Halt is taken
 );
 
-  logic [6:0] R_TYPE, I_TYPE, U_TYPE, J_TYPE, JR_TYPE,LW, SW, BR;
+  logic [6:0] R_TYPE, I_TYPE, U_TYPE, J_TYPE, JR_TYPE,LW, SW, BR, HT;
 
   assign R_TYPE = 7'b0110011;  //add,and
   assign I_TYPE = 7'b0010011;  //addi
@@ -31,6 +32,7 @@ module Controller (
   assign U_TYPE = 7'b0110111;  //lui
   assign J_TYPE = 7'b1101111; //Jal
   assign JR_TYPE = 7'b1100111; //Jalr
+  assign HT = 7'b1111111; //Halt
 
   assign ALUSrc = (Opcode == LW || Opcode == SW || Opcode == I_TYPE || Opcode == U_TYPE || Opcode == J_TYPE || Opcode == JR_TYPE);
   assign MemtoReg[0] = (Opcode == LW || Opcode == J_TYPE || Opcode == JR_TYPE);
@@ -43,4 +45,5 @@ module Controller (
   assign Branch = (Opcode == BR);
   assign Jal = (Opcode == J_TYPE);
   assign Jalr = (Opcode == JR_TYPE);
+  assign Halt = (Opcode == HT);
 endmodule
