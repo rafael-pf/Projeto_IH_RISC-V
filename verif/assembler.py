@@ -253,6 +253,12 @@ INSTRUCTION = {
   "funct3": "111",
   "funct7": "0000000"
  },
+ "halt": {
+  "format": "H",
+  "opcode": "1111111",
+  "funct3": "",
+  "funct7": ""
+ },
 }
 
 
@@ -369,7 +375,7 @@ def translate_instruction(instruction):
 		funct3 = INSTRUCTION[instr]["funct3"]
 		funct7 = INSTRUCTION[instr]["funct7"]
 
-		if (INSTRUCTION[instr]["format"] not in ["S", "B"]):
+		if (INSTRUCTION[instr]["format"] not in ["S", "B", "H"]):
 			rd = instruction.split(" ")[1].split(",")[0]
 
 			check_register(rd)
@@ -508,6 +514,9 @@ def translate_instruction(instruction):
 			shamt = sfill(sbin(shamt)[0:6], 5)
 
 			binary = funct7 + shamt + rs1 + funct3 + rd + opcode
+
+		elif (instr == "halt"):
+			binary = "0"*25 + opcode
 
 	except Exception as e:
 		print(f"Error translating instruction '{instruction.rstrip()}': {e}")
